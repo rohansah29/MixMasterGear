@@ -7,13 +7,13 @@ import SignUp from '../pages/SignUp';
 import Cart from '../pages/Cart';
 import SingleProduct from '../pages/SingleProduct';
 
-export default function AllRoutes() {
+export default function AllRoutes({isOpen, onOpen, onClose,setCurrUser}) {
   return (
     <Routes>
       <Route path='/' element={<HomePage/>}></Route>
       <Route path='/products' element={<ProductPage/>}></Route>
-      <Route path='/login' element={<Login/>}></Route>
-      <Route path='/signup' element={<SignUp/>}></Route>
+      <Route path='/login' element={<Login  isOpen = {isOpen} onOpen={onOpen} onClose = {onClose} setCurrUser={setCurrUser}/>}></Route>
+      <Route path='/signup' element={<SignUp isOpen = {isOpen} onOpen={onOpen} onClose = {onClose} setCurrUser={setCurrUser} />}></Route>
       <Route path='/cart' element={<Cart/>}></Route>
       <Route path='/products/:id' element={<SingleProduct/>}></Route>
     </Routes>
