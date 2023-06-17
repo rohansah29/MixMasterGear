@@ -45,11 +45,11 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Box bg="gray.200" py={4}>
-        <Flex maxW="container.xl" mx="auto" px={6}>
-          <HStack h="60px" pl="0px" spacing="10px">
+      <Box bg="white" py={4} style={{ fontSize: "18px"}}>
+        <Flex mx="auto" px={6}>
+          <HStack h="60px" pl="0px" spacing="18px">
             <Menu>
-              <MenuButton as={Button} bg="none" rightIcon={<ChevronDownIcon />}>
+              <MenuButton as={Button} _hover={{ color: "#00BFA5" }} size={30} bg="none" rightIcon={<ChevronDownIcon />}>
                 Home
               </MenuButton>
               <MenuList>
@@ -62,19 +62,19 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
               </MenuList>
             </Menu>
             <Link to="/products" onClick={() => setCategory("mixers")}>
-              Mixer
+              <Text _hover={{ color: "#00BFA5" }}>Mixer</Text>
             </Link>
             <Link to="/products" onClick={() => setCategory("Speakers")}>
-              Speaker
+              <Text _hover={{ color: "#00BFA5" }}>Speaker</Text>
             </Link>
             <Link to="/products" onClick={() => setCategory("headphones")}>
-              Headphone
+              <Text _hover={{ color: "#00BFA5" }}>Headphone</Text>
             </Link>
             <Link to="/products" onClick={() => setCategory("controllers")}>
-              Controller
+              <Text _hover={{ color: "#00BFA5" }}>Controller</Text>
             </Link>
             <Link to="/products" onClick={() => setCategory("cables")}>
-              Cables
+              <Text _hover={{ color: "#00BFA5" }}>Cables</Text>
             </Link>
           </HStack>
           <HStack>
@@ -83,18 +83,21 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
                 src={logo}
                 alt="Logo"
                 style={{ marginLeft: "100px" }}
-                w="143px"
+                w="250px"
+                mt="-2"
               />
             </Link>
           </HStack>
           <Spacer />
           <HStack h="60px" pl="40px" spacing="20px">
             <Link to="/login" onClick={onOpen} mr={4}>
-              <AiOutlineUser size={20} />
+              <Text _hover={{ color: "#00BFA5" }}><AiOutlineUser size={30} /></Text>
             </Link>
-            <p>{username}</p>
-            <Link mr={4}>
-              <AiOutlineShoppingCart size={20} to="/cart" />
+            <Text _hover={{ color: "#00BFA5" }}>{username}</Text>
+            <Link mr={4} to="/cart">
+              <Text _hover={{ color: "#00BFA5" }}>
+                <AiOutlineShoppingCart size={30} />
+              </Text>
             </Link>
             <Link
               onClick={() => {
@@ -105,7 +108,7 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
                 window.location.reload();
               }}
             >
-              <BsBoxArrowRight size={20} />
+              <Text _hover={{ color: "#00BFA5" }}><BsBoxArrowRight size={30} /></Text>
             </Link>
           </HStack>
         </Flex>

@@ -31,6 +31,7 @@ export default function ProductCard({id,title,image,price,popular}) {
             price: res.data.price,
             image: res.data.image,
             description: res.data.description,
+            quantity:1
           };
           axios
             .get(`https://mixmastergear.onrender.com/random`)
@@ -80,7 +81,8 @@ export default function ProductCard({id,title,image,price,popular}) {
 
   return (
     <div>
-      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'style={{marginLeft:"60px"}} >
+      <Box maxW='sm' p="25px" overflow='hidden' borderRadius="10px" _hover={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)' }} style={{marginLeft:"60px",width:"500px",fontFamily: "Poppins, sans-serif"}} >
+      <Link to={`/products/${id}`}>
          <Image src={image} alt="err" />
    
          <Box p='6' mt="-10">
@@ -117,11 +119,12 @@ export default function ProductCard({id,title,image,price,popular}) {
                  />
                ))}
              <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-               {id*9} reviews
+               {id*9} Ratings
              </Box>
            </Box>
          </Box>
-         <Divider />
+         </Link>
+         <Divider h="3px" bg="black" />
         <ButtonGroup spacing="2" w="100%">
           <Button
             variant="solid"
