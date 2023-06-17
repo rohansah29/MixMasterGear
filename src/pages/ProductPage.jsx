@@ -18,6 +18,7 @@ import { useContext } from "react";
 import { AuthContext } from "../components/AuthContextProvider";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const initialState = {
   loading: "false",
@@ -44,7 +45,7 @@ export default function ProductPage() {
   let [page, setpage] = useState(1);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { category, setCategory } = useContext(AuthContext);
-  const { data } = state;
+  const { data,loading } = state;
   let URL = category;
 
   const [isHovered, setIsHovered] = useState(false);
@@ -91,7 +92,7 @@ export default function ProductPage() {
 
   return (
     <>
-      <Box>
+      <Box style={{ fontFamily: "Poppins, sans-serif"}}>
         <Flex>
           <Box p="4">
             <Breadcrumb
@@ -107,7 +108,7 @@ export default function ProductPage() {
               </BreadcrumbItem>
 
               <BreadcrumbItem isCurrentPage color="#00BFA5">
-                <BreadcrumbLink href="#">Products</BreadcrumbLink>
+                <BreadcrumbLink href="#">{category}</BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
           </Box>
@@ -150,7 +151,7 @@ export default function ProductPage() {
           </Box>
         </Flex>
         <Spacer />
-        <SimpleGrid
+        {loading?<Loading/>:(<SimpleGrid
           columns={[1, 2]}
           spacing="40px"
           w="75%"
@@ -161,7 +162,7 @@ export default function ProductPage() {
           {data.map((el) => (
             <ProductCard key={el.id} {...el} />
           ))}
-        </SimpleGrid>
+        </SimpleGrid>)}
       </Box>
       <Box w="20%" m="auto" mt="30px">
         <Button isDisabled={page === 1} onClick={() => handleClick(-1)}>

@@ -1,11 +1,14 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Badge, Box, Image } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from 'react-router-dom';
+import { AuthContext } from './AuthContextProvider';
 
 export default function Slider() {
     const [data,setData]=useState([]);
+    const {setCategory}=useContext(AuthContext);
 
     const fetchData=async()=>{
         let res=await fetch(`https://mixmastergear.onrender.com/mixers`);
@@ -40,6 +43,7 @@ export default function Slider() {
     <>
     <Carousel responsive={responsive}>
       {data.map((el)=>(
+        <Link to={`/products/${el.id}`} onClick={()=>setCategory("mixers")}>
          <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'style={{marginLeft:"60px"}} >
          <Image src={el.image} alt="err" />
    
@@ -77,11 +81,12 @@ export default function Slider() {
                  />
                ))}
              <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-               {el.id*9} reviews
+               {el.id*9} Ratings
              </Box>
            </Box>
          </Box>
        </Box>
+       </Link>
       ))}
       </Carousel>
     </>

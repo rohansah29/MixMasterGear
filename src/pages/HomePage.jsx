@@ -20,6 +20,7 @@ import dj from "../image/dj-removebg.png";
 import Slider from "../components/Slider";
 import Slider2 from "../components/Slider2";
 import { StarIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -64,7 +65,7 @@ export default function HomePage() {
               _hover="none"
               style={{ marginTop: "-100px" }}
             >
-              Shop Now
+              <Link to="/products">Shop Now</Link>
             </Button>
             <Button
               variant="solid"
