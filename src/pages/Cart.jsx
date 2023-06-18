@@ -29,6 +29,7 @@ import { CartTable } from "../components/CartTable";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 
+
 let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 console.log(cartArray);
 
@@ -81,14 +82,14 @@ export default function Cart() {
   };
 
   const handleOrder = () => {
-    toast({
-      title: "Order Placed !",
-      description: "Order Placed Successfully !",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-    navigate("/");
+    // toast({
+    //   title: "Order Placed !",
+    //   description: "Order Placed Successfully !",
+    //   status: "success",
+    //   duration: 3000,
+    //   isClosable: true,
+    // });
+    navigate("/checkout");
     // let cart=cartArray.filter((el)=>el.id==0);
     // console.log(cart);
     // axios

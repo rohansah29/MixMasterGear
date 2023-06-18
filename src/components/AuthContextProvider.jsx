@@ -8,6 +8,7 @@ export const AuthContext=createContext();
 export default function AuthContextProvider({children}) {
 const [category,setCategory]=useState("mixers");
 const [isAuth, setIsAuth] = useState(false);
+const [sum,setSum]=useState(0);
 
   useEffect(()=>{
     if(username !== null){
@@ -23,7 +24,7 @@ const [isAuth, setIsAuth] = useState(false);
   };
 
   return (
-    <AuthContext.Provider value={{category,setCategory,isAuth, setIsAuth, login, logout}}>
+    <AuthContext.Provider value={{category,setCategory,isAuth, setIsAuth, login, logout,sum,setSum}}>
       {children}
     </AuthContext.Provider>
   )
