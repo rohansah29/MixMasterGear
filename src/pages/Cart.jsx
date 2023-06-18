@@ -24,99 +24,76 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { CartTable } from "../components/CartTable";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import { AuthContext } from "../components/AuthContextProvider";
 
 
-let cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
-console.log(cartArray);
 
 export default function Cart() {
-  const [cartData, setCartData] = useState([]);
-  const [loading,setLoading]=useState(false);
-  const [totalSum, setTotalSum] = useState(0);
-  const [subTotal,setSubTotal]=useState(0);
-  const [temp,setTemp]=useState(0);
-  const toast = useToast();
-  const navigate = useNavigate();
+  // CodeStart
+  const [loading, setLoading] =useState(false);
 
-  function getCartDetail() {
+  const navigate=useNavigate();
+  const [Products, setProducts] =useState([]);
+  const {setSum}=useContext(AuthContext);
+
+  const getCartDetail=()=>{
+    if(JSON.parse(localStorage.getItem("cartArray")).length>0){
+      setProducts(JSON.parse(localStorage.getItem("cartArray")));
+      return;
+    }
     setLoading(true);
     axios
       .get(`https://mixmastergear.onrender.com/random`)
       .then((res) => {
-        setCartData(res.data);
         localStorage.setItem("cartArray", JSON.stringify(res.data));
-
-        let sum = 0;
-
-        for (let i = 0; i < cartArray.length; i++) {
-          sum += cartArray[i].quantity * cartArray[i].price;
-        }
-        setTotalSum( typeof sum === "number" ? sum : 0);
-        const totalPriceQuantity = res.data.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-        setSubTotal(totalPriceQuantity)
+        setProducts(JSON.parse(localStorage.getItem("cartArray")));
         setLoading(false);
       });
   }
-  console.log(totalSum);
 
-  useEffect(() => {
+  useEffect(()=>{
     getCartDetail();
-  }, []);
+  },[])
 
-  const handleDelete = (val) => {
-    console.log(val);
-    cartArray=cartArray.filter((ele)=>{
-      return ele.id!==val;
-    });
-    localStorage.setItem("cartArray",JSON.stringify(cartArray));
+  useEffect(()=>{
+    localStorage.setItem("cartArray", JSON.stringify(Products));
+    setSum(Products.reduce((a,b)=>a+(b.price*b.quantity),0))
+  },[Products])
 
+  const handleDelete = (id) => {
+    console.log("Going to delete: ",id);
+    setProducts(prevProduct=>prevProduct.filter(ele=>ele.id!==id));
     axios
-      .delete(`https://mixmastergear.onrender.com/random/${val}`)
-      .then((res) => {
-        getCartDetail();
-      });
-  };
+    .delete(`https://mixmastergear.onrender.com/random/${id}`)
+    .then((res) => {
+      getCartDetail();
+    });
+   };
 
   const handleOrder = () => {
-    // toast({
-    //   title: "Order Placed !",
-    //   description: "Order Placed Successfully !",
-    //   status: "success",
-    //   duration: 3000,
-    //   isClosable: true,
-    // });
+
     navigate("/checkout");
-    // let cart=cartArray.filter((el)=>el.id==0);
-    // console.log(cart);
-    // axios
-    //   .patch(`https://mixmastergear.onrender.com/random`,cart)
-    //   .then((res) => {
-    //     console.log(res);
-    //     getCartDetail();
-    //   });
-  };
-  // const handleQty=(id,val)=>{
-    
-  //   let obj
-  //   axios.get(`https://mixmastergear.onrender.com/random/${id}`)
-  //   .then(response => {
-  //     obj=response.data;
-  //     setTemp(obj.quantity)
+  //   axios.put(`https://mixmastergear.onrender.com/random`,Products).then((res)=>{
+  //     console.log(`updated cart backend`,res.data);
   //   })
-  //   const payload={quantity:temp+val}
-  //   axios.patch(`https://mixmastergear.onrender.com/random/${id}`, payload)
-  // .then(response => {
-  //   getCartDetail();
-  //   console.log('Resource updated successfully:', response.data);
-  // })
-  // .catch(error => {
-  //   console.error('Error updating resource:', error);
-  // });
-  // }
+  }
+
+  const handleChange=(ProductID,quantity)=>{
+    setProducts(prevProduct=>{
+      let currentProduct=prevProduct
+      currentProduct.map(product=>{
+        if(product.id===ProductID){
+          product.quantity=quantity;
+        }
+        return product;
+      })
+      return currentProduct.slice();
+    });
+  }
 
   return (
     <>
@@ -137,7 +114,7 @@ export default function Cart() {
           <BreadcrumbLink href="#">Cart</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      {cartArray.length==0 && cartData.length==0?<Image src="https://assets.materialup.com/uploads/87d4df96-a55f-4f4b-9a17-a696eded97f3/preview.gif" style={{margin:"auto",width:"40%"}}/>:<>
+      {Products.length==0?<Image src="https://assets.materialup.com/uploads/87d4df96-a55f-4f4b-9a17-a696eded97f3/preview.gif" style={{margin:"auto",width:"40%"}}/>:<>
       <TableContainer w="95%" m="auto" mt="30px" border="2px solid black" style={{ fontFamily: "Poppins, sans-serif"}}>
         <Table variant="striped" bg="white">
           <TableCaption>Product Added into Carts</TableCaption>
@@ -150,15 +127,14 @@ export default function Cart() {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {(cartArray.length==0?cartData:cartArray)?.map((item) => (
+            {Products.map(product=>
               <CartTable
-                key={item.id}
-                {...item}
-                handleDelete={handleDelete}
-                totalSum={totalSum}
-                setTotalSum={setTotalSum}
-              />
-            ))}
+                key={product.id}
+                {...product}
+                onDelete={handleDelete}
+                onChange={handleChange}
+              />)
+            }
           </Tbody>
         </Table>
       </TableContainer>
@@ -175,7 +151,7 @@ export default function Cart() {
             Total :{" "}
           </Text>
           <Spacer />
-          <Text fontSize="18px">₹{totalSum} /-</Text>
+          <Text fontSize="18px">₹{Products.reduce((a,b)=>a+(b.price*b.quantity),0)} /-</Text>
         </HStack>
         <HStack w="80%" pl="100px">
           <Text fontSize="20px" fontWeight="bold">
