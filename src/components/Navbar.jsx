@@ -33,7 +33,7 @@ import {
   SearchIcon,
 } from "@chakra-ui/icons";
 import logo from "../image/MixMasterGear.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { useContext } from "react";
@@ -45,11 +45,11 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Box bg="white" py={4} style={{ fontSize: "18px"}}>
+      <Box bg="white" py={4} mt={5} style={{ fontSize: "18px"}}>
         <Flex mx="auto" px={6}>
           <HStack h="60px" pl="0px" spacing="18px">
             <Menu>
-              <MenuButton as={Button} _hover={{ color: "#00BFA5" }} size={30} bg="none" rightIcon={<ChevronDownIcon />}>
+              <MenuButton as={Button} mt={-3.5} _hover={{ color: "#00BFA5" }} size={30} bg="none" rightIcon={<ChevronDownIcon />}>
                 Home
               </MenuButton>
               <MenuList>
@@ -84,7 +84,7 @@ const Navbar = ({ isOpen, onOpen, onClose, currUser, setCurrUser }) => {
                 alt="Logo"
                 style={{ marginLeft: "100px" }}
                 w="250px"
-                mt="-2"
+                mt="-5"
               />
             </Link>
           </HStack>

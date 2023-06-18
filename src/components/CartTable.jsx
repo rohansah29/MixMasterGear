@@ -18,6 +18,8 @@ import {
   } from "@chakra-ui/react";
   import axios from "axios";
   import React, { useEffect, useState } from "react";
+  import { AuthContext } from "./AuthContextProvider";
+import { useContext } from "react";
   
   export const CartTable = ({
     image,
@@ -33,10 +35,12 @@ import {
     handleQty
   }) => {
     const [count, setCount] = useState(1);
+    
+    const {setSum}=useContext(AuthContext);
 
       useEffect(()=>{
           setTotalSum(count*price)
-  
+          setSum(count*price);
       },[count])
   
     return (
