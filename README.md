@@ -17,11 +17,11 @@ Version 2 Progress: 50%
 
 
 ## Landing Page
-![Home_page](https://www.dropbox.com/s/shc6cr4rbydsutr/Home_Page.png?dl=0)
+![Home_Page](https://github.com/rohansah29/nutty-form-5506/assets/119648587/6bf613a4-29cb-415c-9e4e-729db0665917)
 ## Product page
-![Product_Page](https://www.dropbox.com/s/qw09a7bbkwqgz0c/Products_Page.png?dl=0)
-## Product page
-![Single_Product_Page](https://www.dropbox.com/s/rggal38d4r5i3n1/Single_Product_Page.png?dl=0)
+![Products_Page](https://github.com/rohansah29/nutty-form-5506/assets/119648587/541d56c3-b66f-4102-bf55-ed17adb14c46)
+## Single Product page
+![Single_Product_Page](https://github.com/rohansah29/nutty-form-5506/assets/119648587/c7926226-b153-4be4-87e4-d41f7c8a668d)
 
 This is a MixMasterGear website is your ultimate destination for all your DJ equipment needs.As a specialized online store catering specifically to DJs, MixMasterGear offers a wide range of high-quality DJ equipment, ensuring that you have everything you need to create memorable mixes and elevate your performances to the next level.
 
