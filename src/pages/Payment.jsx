@@ -421,7 +421,7 @@ export default function Payment() {
                         onClick={handleOrder}
                         color="#00BFA5"
                       >
-                        Checkout
+                        Place Order
                       </Button>
                     </div>
                   </form>
