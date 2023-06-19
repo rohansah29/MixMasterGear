@@ -53,8 +53,8 @@ export default function Cart() {
         setProducts(JSON.parse(localStorage.getItem("cartArray")));
         setLoading(false);
       });
+      console.log(Products);
   }
-
   useEffect(()=>{
     getCartDetail();
   },[])
@@ -114,7 +114,7 @@ export default function Cart() {
           <BreadcrumbLink href="#">Cart</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      {Products.length==0?<Image src="https://assets.materialup.com/uploads/87d4df96-a55f-4f4b-9a17-a696eded97f3/preview.gif" style={{margin:"auto",width:"40%"}}/>:<>
+      {Products && Products.length==0?<Image src="https://assets.materialup.com/uploads/87d4df96-a55f-4f4b-9a17-a696eded97f3/preview.gif" style={{margin:"auto",width:"40%"}}/>:<>
       <TableContainer w="95%" m="auto" mt="30px" border="2px solid black" style={{ fontFamily: "Poppins, sans-serif"}}>
         <Table variant="striped" bg="white">
           <TableCaption>Product Added into Carts</TableCaption>
@@ -127,7 +127,7 @@ export default function Cart() {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {Products.map(product=>
+            {Products && Products.map(product=>
               <CartTable
                 key={product.id}
                 {...product}
