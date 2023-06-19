@@ -17,11 +17,11 @@ Version 2 Progress: 50%
 
 
 ## Landing Page
-![Home_page](https://photos.app.goo.gl/yTSGybMypFZZpETW9)
+![Home_page](https://www.dropbox.com/s/shc6cr4rbydsutr/Home_Page.png?dl=0)
 ## Product page
-![Product_Page](https://photos.app.goo.gl/UwkkdUjCfgCPMZee9)
+![Product_Page](https://www.dropbox.com/s/qw09a7bbkwqgz0c/Products_Page.png?dl=0)
 ## Product page
-![Single_Product_Page](https://photos.app.goo.gl/k9r7bBUYKD3AXNKH9)
+![Single_Product_Page](https://www.dropbox.com/s/rggal38d4r5i3n1/Single_Product_Page.png?dl=0)
 
 This is a MixMasterGear website is your ultimate destination for all your DJ equipment needs.As a specialized online store catering specifically to DJs, MixMasterGear offers a wide range of high-quality DJ equipment, ensuring that you have everything you need to create memorable mixes and elevate your performances to the next level.
 
@@ -33,7 +33,6 @@ In this project i have tried to manipulate dom elements, styling using Chakra UI
 * CSS3
 * Chakra UI
 * rest-api
-* auth0
 
 For storing user data i used localStorage & JSON-Server.
 
