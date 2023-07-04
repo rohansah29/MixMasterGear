@@ -68,3 +68,5 @@ Follow the following steps to get development environment running.
   npm start
   ```
 ---
+
+![mixmastergear](https://github.com/rohansah29/nutty-form-5506/assets/119648587/57a9ca1d-9598-4979-91fd-78a3dec7f01f)
