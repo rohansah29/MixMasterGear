@@ -4,7 +4,7 @@
 
 -----
 ### Version 1 : 
-Project: DJ Equipment Store with complete authentication made using React.js
+Project: DJ Equipment Store with completed authentication made using React.js
 Original-Design: [HERE!](https://www.behance.net/gallery/160598903/E-Commerce-DJ-Equipment-Store?tracking_source=search_projects%7Cecommerce)
 
 MixMasterGear-Website version 1 hosted [HERE!](https://mixmastergear.netlify.app/)
